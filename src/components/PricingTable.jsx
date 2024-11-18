@@ -1,140 +1,144 @@
-import { Box, Container, Heading, Table, Thead, Tbody, Tr, Th, Td, Text, VStack, SimpleGrid, Image, HStack } from '@chakra-ui/react'
+import { 
+  Box, 
+  Container, 
+  VStack, 
+  Text, 
+  Button,
+  SimpleGrid,
+  HStack,
+  IconButton
+} from '@chakra-ui/react'
+import { AddIcon, MinusIcon } from '@chakra-ui/icons'
+import { useState } from 'react'
 
 function PricingTable() {
+  const [selectedServices, setSelectedServices] = useState([])
+  const [bhk, setBhk] = useState(1)
+  const [showPricing, setShowPricing] = useState(false)
+
   const services = [
-    { name: 'Sweeping', icon: '🧹' },
-    { name: 'Mopping', icon: '🪣' },
-    { name: 'Dusting', icon: '🪮' },
-    { name: 'Utensils', icon: '🍽️' },
-    { name: 'Bathroom', icon: '🚽' },
+    { id: 'sweeping', name: 'Sweeping', icon: '🧹', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
+    { id: 'mopping', name: 'Mopping', icon: '🪣', prices: { 1: 70, 2: 90, 3: 100, 4: 120 }, basePrice4Plus: 20 },
+    { id: 'dusting', name: 'Dusting', icon: '🪮', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
+    { id: 'utensils', name: 'Utensils', icon: '🍽️', prices: { 1: 60, 2: 80, 3: 90, 4: 100 }, basePrice4Plus: 10 },
+    { id: 'bathroom', name: 'Bathroom', icon: '🚽', prices: { 1: 130, 2: 210, 3: 280, 4: 350 }, basePrice4Plus: 70 }
   ]
 
-  const pricing = [
-    { service: 'Mopping', bhk1: '₹70', bhk2: '₹90', bhk3: '₹100', bhk4: '₹20 +' },
-    { service: 'Sweeping', bhk1: '₹60', bhk2: '₹80', bhk3: '₹90', bhk4: '₹20 +' },
-    { service: 'Dusting', bhk1: '₹60', bhk2: '₹80', bhk3: '₹90', bhk4: '₹20 +' },
-    { service: 'Utensils', bhk1: '₹60', bhk2: '₹80', bhk3: '₹90', bhk4: '₹10 +' },
-    { service: 'Bathroom', bhk1: '₹130', bhk2: '₹210', bhk3: '₹280', bhk4: '₹70 +' },
-  ]
+  const toggleService = (serviceId) => {
+    setSelectedServices(prev => 
+      prev.includes(serviceId) 
+        ? prev.filter(id => id !== serviceId)
+        : [...prev, serviceId]
+    )
+  }
+
+  const adjustBHK = (increment) => {
+    setBhk(prev => Math.max(1, prev + increment))
+  }
+
+  const calculateServicePrice = (service, currentBhk) => {
+    if (currentBhk <= 4) {
+      return service.prices[currentBhk]
+    }
+    const extraBHKs = currentBhk - 4
+    return service.prices[4] + (extraBHKs * service.basePrice4Plus)
+  }
+
+  const calculateTotal = () => {
+    return selectedServices.reduce((total, serviceId) => {
+      const service = services.find(s => s.id === serviceId)
+      return total + calculateServicePrice(service, bhk)
+    }, 0)
+  }
 
   return (
     <Box py={{ base: 6, md: 10 }} bg="gray.50">
       <Container maxW="container.xl" px={{ base: 4, md: 8 }}>
-        <VStack spacing={{ base: 6, md: 8 }}>
-          {/* HOW IT WORKS heading with question mark */}
-          <Box
-            width="100%"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            mb={{ base: 4, md: 6 }}
+        <VStack spacing={8}>
+          <Text
+            fontSize={{ base: "xl", md: "2xl" }}
+            fontWeight="bold"
+            textAlign="center"
           >
-            <HStack 
-              spacing={{ base: 1, md: 2 }}
-              align="flex-end"
-              width="fit-content"
-            >
-              <Text
-                color="#000"
-                textAlign="center"
-                fontFamily="Istok Web"
-                fontSize={{ base: "32px", sm: "40px", md: "60px", lg: "80px" }}
-                fontStyle="normal"
-                fontWeight={700}
-                lineHeight="90%"
-                whiteSpace="nowrap"
-              >
-                HOW IT WORKS
-              </Text>
+            Transparent Pricing
+          </Text>
+          <Text textAlign="center" color="gray.600">
+            No long term commitments. Only pay for what you need.
+          </Text>
+
+          {/* Service Selection */}
+          <SimpleGrid columns={{ base: 2, md: 3 }} spacing={4} width="100%">
+            {services.map((service) => (
               <Box
-                width={{ base: "30px", md: "56.488px" }}
-                height={{ base: "36px", md: "67.394px" }}
-                transform="rotate(10.146deg)"
-                flexShrink={0}
-                display="inline-flex"
-                mb={{ base: "2px", md: "4px" }}
+                key={service.id}
+                bg={selectedServices.includes(service.id) ? 'brand.50' : 'white'}
+                p={4}
+                borderRadius="md"
+                cursor="pointer"
+                onClick={() => toggleService(service.id)}
+                border="1px solid"
+                borderColor={selectedServices.includes(service.id) ? 'brand.200' : 'gray.200'}
+                _hover={{ borderColor: 'brand.200' }}
               >
-                <Image
-                  src="/question mark.png"
-                  alt="Question Mark"
-                  width="100%"
-                  height="100%"
-                  objectFit="contain"
-                />
+                <VStack spacing={1}>
+                  <Text fontSize="2xl">{service.icon}</Text>
+                  <Text>{service.name}</Text>
+                </VStack>
               </Box>
+            ))}
+          </SimpleGrid>
+
+          {/* BHK Selection */}
+          <Box width="100%" textAlign="center">
+            <Text mb={2}>Number of BHK</Text>
+            <HStack justify="center" spacing={4}>
+              <IconButton
+                icon={<MinusIcon />}
+                onClick={() => adjustBHK(-1)}
+                isDisabled={bhk <= 1}
+                size="sm"
+                rounded="full"
+              />
+              <Text fontSize="xl" fontWeight="bold">{bhk} BHK</Text>
+              <IconButton
+                icon={<AddIcon />}
+                onClick={() => adjustBHK(1)}
+                size="sm"
+                rounded="full"
+              />
             </HStack>
           </Box>
-          
-          {/* Services Icons */}
-          <Box width="100%">
-            <Heading 
-              as="h3" 
-              size={{ base: "md", md: "lg" }} 
-              mb={{ base: 4, md: 6 }} 
-              color="brand.600"
-              textAlign="center"
-            >
-              1. Choose Your Tasks
-            </Heading>
-            <SimpleGrid 
-              columns={{ base: 3, md: 5 }} 
-              spacing={{ base: 4, md: 8 }}
-              width="100%"
-              justifyItems="center"
-            >
-              {services.map((service) => (
-                <VStack key={service.name} spacing={2}>
-                  <Text fontSize={{ base: "2xl", md: "3xl" }}>{service.icon}</Text>
-                  <Text fontSize={{ base: "sm", md: "md" }}>{service.name}</Text>
-                </VStack>
-              ))}
-            </SimpleGrid>
-          </Box>
 
-          {/* Pricing Table */}
-          <Box width="100%">
-            <Heading 
-              as="h3" 
-              size={{ base: "md", md: "lg" }} 
-              mb={4} 
-              color="brand.600"
-              textAlign="center"
-            >
-              2. Tell Us How Many BHKs?
-            </Heading>
-            <Text 
-              mb={4} 
-              color="gray.600" 
-              fontSize={{ base: "sm", md: "md" }}
-              textAlign="center"
-            >
-              (Transparent pricing and no long term commitments. Only pay for what you need.)
-            </Text>
-            <Box overflowX="auto" mx="-16px" px="16px">
-              <Table variant="simple" bg="white" boxShadow="sm" size={{ base: "sm", md: "md" }}>
-                <Thead bg="brand.600">
-                  <Tr>
-                    <Th color="white" whiteSpace="nowrap">Task</Th>
-                    <Th color="white" whiteSpace="nowrap">1 BHK</Th>
-                    <Th color="white" whiteSpace="nowrap">2 BHK</Th>
-                    <Th color="white" whiteSpace="nowrap">3 BHK</Th>
-                    <Th color="white" whiteSpace="nowrap">4+ ₹/BHK</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {pricing.map((row) => (
-                    <Tr key={row.service}>
-                      <Td whiteSpace="nowrap">{row.service}</Td>
-                      <Td>{row.bhk1}</Td>
-                      <Td>{row.bhk2}</Td>
-                      <Td>{row.bhk3}</Td>
-                      <Td>{row.bhk4}</Td>
-                    </Tr>
-                  ))}
-                </Tbody>
-              </Table>
-            </Box>
-          </Box>
+          {/* See Price Button */}
+          <Button
+            colorScheme="brand"
+            size="lg"
+            width={{ base: "full", md: "auto" }}
+            onClick={() => setShowPricing(true)}
+            isDisabled={selectedServices.length === 0}
+          >
+            See Price
+          </Button>
+
+          {/* Display Price */}
+          {showPricing && selectedServices.length > 0 && (
+            <VStack spacing={2} width="100%" bg="white" p={6} borderRadius="md" border="1px solid" borderColor="gray.200">
+              <Text fontSize="xl" fontWeight="bold">
+                Total Price: ₹{calculateTotal()}
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                Price breakdown:
+              </Text>
+              {selectedServices.map(serviceId => {
+                const service = services.find(s => s.id === serviceId)
+                return (
+                  <Text key={serviceId} fontSize="sm">
+                    {service.name}: ₹{calculateServicePrice(service, bhk)}
+                  </Text>
+                )
+              })}
+            </VStack>
+          )}
         </VStack>
       </Container>
     </Box>
