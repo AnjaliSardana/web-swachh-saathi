@@ -33,11 +33,13 @@ import {
 import { useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
 import ServiceForm from '../components/ServiceForm'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 export default function Component() {
+  const location = useLocation();
+  const baseUrl = import.meta.env.MODE === 'production' ? '/web-swachh-saathi' : '';
   const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -187,7 +189,7 @@ export default function Component() {
                 mt={{ base: 4, md: 8 }}
               >
                 <Image
-                  src="/three guys image.png"
+                  src={`${baseUrl}/three guys image.png`}
                   alt="Three team members"
                   width="100%"
                   height="auto"
@@ -214,7 +216,7 @@ export default function Component() {
                       minWidth="48px"
                     >
                       <Image
-                        src="/1 icon.svg"
+                        src={`${baseUrl}/1 icon.svg`}
                         alt="Step 1"
                         width="48px"
                         height="48px"
@@ -263,7 +265,7 @@ export default function Component() {
                       minWidth="48px"
                     >
                       <Image
-                        src="/2 icon.svg"
+                        src={`${baseUrl}/2 icon.svg`}
                         alt="Step 2"
                         width="48px"
                         height="48px"
