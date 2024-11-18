@@ -189,7 +189,7 @@ export default function Component() {
                 mt={{ base: 4, md: 8 }}
               >
                 <Image
-                  src={`${baseUrl}/three guys image.png`}
+                  src="three guys image.png"
                   alt="Three team members"
                   width="100%"
                   height="auto"
@@ -216,7 +216,7 @@ export default function Component() {
                       minWidth="48px"
                     >
                       <Image
-                        src={`${baseUrl}/1 icon.svg`}
+                        src="1 icon.svg"
                         alt="Step 1"
                         width="48px"
                         height="48px"
@@ -265,7 +265,7 @@ export default function Component() {
                       minWidth="48px"
                     >
                       <Image
-                        src={`${baseUrl}/2 icon.svg`}
+                        src="2 icon.svg"
                         alt="Step 2"
                         width="48px"
                         height="48px"
