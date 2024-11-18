@@ -36,6 +36,7 @@ import ServiceForm from '../components/ServiceForm'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
+import PricingTable from '../components/PricingTable'
 
 export default function Component() {
   const [address, setAddress] = useState('')
@@ -287,91 +288,7 @@ export default function Component() {
         </Box>
 
         {/* Pricing Section */}
-        <Box as="section" pt="0" pb="8">
-          <Container maxW="container.xl" px={{ base: 4, md: 6 }}>
-            <VStack maxW="800px" mx="auto" spacing="4">
-              <Heading 
-                fontSize={{ base: "2xl", md: "3xl" }}
-                fontWeight="bold" 
-                textAlign="center"
-              >
-                Transparent Pricing
-              </Heading>
-              <Text 
-                textAlign="center" 
-                color="gray.600"
-              >
-                No long term commitments. Only pay for what you need.
-              </Text>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Task</TableHead>
-                    <TableHead>1 BHK</TableHead>
-                    <TableHead>2 BHK</TableHead>
-                    <TableHead>3 BHK</TableHead>
-                    <TableHead>4+ ₹/BHK</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {[
-                    { task: "Mopping", prices: ["₹70", "₹90", "₹100", "₹20+"] },
-                    { task: "Sweeping", prices: ["₹60", "₹80", "₹90", "₹20+"] },
-                    { task: "Dusting", prices: ["₹60", "₹80", "₹90", "₹20+"] },
-                    { task: "Utensils", prices: ["₹60", "₹80", "₹90", "₹10+"] },
-                    { task: "Bathroom", prices: ["₹130", "₹210", "₹280", "₹70+"] },
-                  ].map((row) => (
-                    <TableRow key={row.task}>
-                      <TableCell fontWeight="medium">{row.task}</TableCell>
-                      {row.prices.map((price, i) => (
-                        <TableCell key={i}>{price}</TableCell>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-              
-              {/* Added text below table */}
-              <VStack spacing="4" mt="8">
-                <Text fontSize="6xl">
-                  🕐
-                </Text>
-                <VStack spacing="3">
-                  <Text
-                    fontSize={{ base: "2xl", md: "3xl" }}
-                    fontWeight="medium"
-                    color="black"
-                    textAlign="center"
-                    maxW="3xl"
-                  >
-                    Get service immediately from one of our vetted maids or schedule ahead.
-                  </Text>
-                  <Text
-                    fontSize={{ base: "xl", md: "2xl" }}
-                    color="gray.600"
-                    textAlign="center"
-                    maxW="3xl"
-                  >
-                    7 AM or 11 PM, no matter the hour, we'll be there in 30 minutes or less
-                  </Text>
-                  <Button
-                    colorScheme="brand"
-                    onClick={onOpen}
-                    px={8}
-                    height="56px"
-                    fontSize="xl"
-                    fontWeight="500"
-                    border="1px solid black"
-                    mt="6"
-                    minW="200px"
-                  >
-                    Request Now
-                  </Button>
-                </VStack>
-              </VStack>
-            </VStack>
-          </Container>
-        </Box>
+        <PricingTable />
 
         {/* Safety Section */}
         <Box borderTop="1px" borderColor="gray.200" bg="gray.50">
