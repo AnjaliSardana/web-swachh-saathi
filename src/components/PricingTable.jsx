@@ -19,7 +19,7 @@ function PricingTable() {
   const services = [
     { id: 'sweeping', name: 'Sweeping', icon: '🧹', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
     { id: 'mopping', name: 'Mopping', icon: '🪣', prices: { 1: 70, 2: 90, 3: 100, 4: 120 }, basePrice4Plus: 20 },
-    { id: 'dusting', name: 'Dusting', icon: '🪮', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
+    { id: 'dusting', name: 'Dusting', icon: '✨', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
     { id: 'utensils', name: 'Utensils', icon: '🍽️', prices: { 1: 60, 2: 80, 3: 90, 4: 100 }, basePrice4Plus: 10 },
     { id: 'bathroom', name: 'Bathroom', icon: '🚽', prices: { 1: 130, 2: 210, 3: 280, 4: 350 }, basePrice4Plus: 70 }
   ]
