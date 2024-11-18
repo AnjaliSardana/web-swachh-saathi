@@ -2,17 +2,17 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDKzcpDM793InvBAuCoM3kgB0I2SUE4Nqw",
-  authDomain: "web-swachh-saathi.firebaseapp.com",
-  projectId: "web-swachh-saathi",
-  storageBucket: "web-swachh-saathi.firebasestorage.app",
-  messagingSenderId: "444404292871",
-  appId: "1:444404292871:web:1234f4a0881be4d275b9a2",
-  measurementId: "G-E4P86Q20G1"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Get Firestore instance instead of Realtime Database
-export const db = getFirestore(app); 
+// Get Firestore instance
+export const db = getFirestore(app);
