@@ -17,24 +17,20 @@ function Hero() {
 
   return (
     <Box 
-      bg="brand.400" 
-      py={{ base: 16, sm: 20, md: 24, lg: 32 }}
-      minHeight={{ base: "60vh", md: "70vh" }}
+      minHeight="100vh"
+      pt={{ base: "6", md: "12" }}
+      pb={{ base: "12", md: "16" }}
+      position="relative"
     >
-      <Container maxW="container.xl" px={{ base: 4, md: 8 }}>
+      <Container 
+        maxW="container.xl" 
+        height="100%"
+        px={{ base: 4, md: 8 }}
+      >
         <VStack 
-          spacing={{ base: 3, sm: 4, md: 5, lg: 6 }} 
-          align="center" 
-          textAlign="center"
+          spacing={6}
+          align="center"
           width="100%"
-          height="auto"
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          flexShrink={0}
-          mx="auto"
-          px={{ base: 4, md: 8 }}
-          pt={{ base: 8, md: 12 }}
         >
           <Heading 
             as="h1" 
@@ -60,10 +56,21 @@ function Hero() {
             in 30 minutes or less
           </Text>
 
-          {/* Address Input Section */}
-          <Box width={{ base: "100%", sm: "400px", md: "500px" }} mt={6}>
-            <InputGroup size="lg">
-              <InputLeftElement pointerEvents="none" height="56px">
+          {/* Address Input Section - Updated */}
+          <Box 
+            width={{ base: "100%", sm: "400px", md: "500px" }}
+            position="relative"
+          >
+            <InputGroup 
+              size="lg"
+              position="relative"
+              zIndex="1"
+            >
+              <InputLeftElement 
+                pointerEvents="none" 
+                height="56px"
+                zIndex="2"
+              >
                 <Icon as={BsPin} color="gray.400" boxSize={5} />
               </InputLeftElement>
               <Input
@@ -72,15 +79,24 @@ function Hero() {
                 border="1px solid"
                 borderColor="gray.300"
                 _hover={{ borderColor: "gray.400" }}
-                _focus={{ borderColor: "brand.400", boxShadow: "0 0 0 1px var(--chakra-colors-brand-400)" }}
+                _focus={{ 
+                  borderColor: "brand.400",
+                  boxShadow: "0 0 0 1px var(--chakra-colors-brand-400)",
+                  position: "relative"
+                }}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 height="56px"
                 fontSize="md"
                 pr="4rem"
                 borderRadius="full"
+                position="relative"
               />
-              <InputRightElement width="4rem" height="56px">
+              <InputRightElement 
+                width="4rem" 
+                height="56px"
+                zIndex="2"
+              >
                 <Button
                   h="1.75rem"
                   size="sm"
@@ -97,22 +113,22 @@ function Hero() {
                 </Button>
               </InputRightElement>
             </InputGroup>
-
-            {/* Download App Button */}
-            <Button
-              variant="outline"
-              width="full"
-              mt={3}
-              height="36px"
-              borderColor="white"
-              color="white"
-              _hover={{ bg: "whiteAlpha.200" }}
-              fontSize="sm"
-              borderRadius="full"
-            >
-              Download the app for saved address
-            </Button>
           </Box>
+
+          {/* Download App Button */}
+          <Button
+            variant="outline"
+            width="full"
+            mt={3}
+            height="36px"
+            borderColor="white"
+            color="white"
+            _hover={{ bg: "whiteAlpha.200" }}
+            fontSize="sm"
+            borderRadius="full"
+          >
+            Download the app for saved address
+          </Button>
         </VStack>
       </Container>
 
