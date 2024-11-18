@@ -38,8 +38,6 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 export default function Component() {
-  const location = useLocation();
-  const baseUrl = import.meta.env.MODE === 'production' ? '/web-swachh-saathi' : '';
   const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
