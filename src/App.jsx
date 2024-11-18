@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -7,7 +7,7 @@ import Terms from './pages/Terms'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Box>
         <Navbar />
         <Box pt="56px">
@@ -18,7 +18,7 @@ function App() {
           </Routes>
         </Box>
       </Box>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
