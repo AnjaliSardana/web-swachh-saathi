@@ -17,7 +17,7 @@ function Terms() {
               https://www.swachhsaathi.com and/or the Swachh Saathi mobile app (collectively, the "Platform", 
               and together with the services made available on or through the Platform, the "Services"). These 
               Terms also include our privacy policy, available at{' '}
-              <Link href="/privacy-policy" color="brand.500">https://www.swachhsaathi.com/privacy-policy</Link>
+              <Link href="/#/privacy-policy" color="brand.500">https://www.swachhsaathi.com/privacy-policy</Link>
               {' '}("Privacy Policy"), and any guidelines, additional, or supplemental terms, policies, and 
               disclaimers made available or issued by us from time to time ("Supplemental Terms"). The Privacy 
               Policy and the Supplemental Terms form an integral part of these Terms. In the event of a conflict 
@@ -222,7 +222,7 @@ function Terms() {
               <Text>
                 (a) You agree that we may, in accordance with our Privacy Policy, collect and use your 
                 personal data. The Privacy Policy is available at{' '}
-                <Link href="/privacy-policy" color="brand.500">
+                <Link href="/#/privacy-policy" color="brand.500">
                   https://www.swachhsaathi.com/privacy-policy
                 </Link>
                 {' '}and it explains the categories of personal data that we collect or otherwise process 
