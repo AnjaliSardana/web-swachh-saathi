@@ -32,6 +32,13 @@ function Navbar() {
 
           {/* Right side - Contact icons */}
           <HStack spacing={4} align="center">
+          <Button
+              size="sm"
+              colorScheme="brand"
+              onClick={onOpen}
+            >
+              Request Services
+            </Button>
             <Link 
               href="tel:+917428421373" 
               color="gray.800"
@@ -57,6 +64,7 @@ function Navbar() {
           </HStack>
         </HStack>
       </Container>
+      <ServiceForm isOpen={isOpen} onClose={onClose} />
     </Box>
   )
 }

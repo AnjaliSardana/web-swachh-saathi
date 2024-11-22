@@ -1,6 +1,11 @@
 import { Box, Container, Heading, Text, VStack, UnorderedList, ListItem, Link } from '@chakra-ui/react'
+import { useEffect } from 'react'
 
 function Terms() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <Box py={12}>
       <Container maxW="container.md">

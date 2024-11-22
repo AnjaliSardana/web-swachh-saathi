@@ -6,13 +6,11 @@ import { useDisclosure } from '@chakra-ui/react'
 import ServiceForm from './ServiceForm'
 
 function Hero() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const [address, setAddress] = useState('')
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleAddressSubmit = () => {
-    if (address.trim()) {
-      onOpen()
-    }
+    onOpen()
   }
 
   return (
@@ -113,6 +111,16 @@ function Hero() {
                 </Button>
               </InputRightElement>
             </InputGroup>
+
+            <Button
+              onClick={onOpen}
+              size="lg"
+              width="full"
+              mt={4}
+              colorScheme="brand"
+            >
+              Get Started
+            </Button>
           </Box>
 
           {/* Download App Button */}

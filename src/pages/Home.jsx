@@ -146,11 +146,7 @@ export default function Component() {
                   h="12"
                   colorScheme="brand"
                   rightIcon={<Icon as={ArrowRight} boxSize="4" />}
-                  onClick={() => {
-                    if (address.trim()) {
-                      onOpen();
-                    }
-                  }}
+                  onClick={onOpen}
                 >
                   Get Started
                 </Button>

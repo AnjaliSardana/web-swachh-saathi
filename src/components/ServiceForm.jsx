@@ -106,6 +106,8 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
 
   const toast = useToast();
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const calculateServicePrice = (service, bhk) => {
     if (bhk <= 4) {
       return service.prices[bhk]
@@ -169,6 +171,8 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
+    setIsSubmitting(true)
+    
     try {
       console.log('Submitting form data:', formData); // Debug log
       
@@ -218,6 +222,8 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -367,7 +373,8 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
                 type="submit" 
                 colorScheme="brand" 
                 width="full"
-                disabled={showSchedulePicker}
+                isDisabled={showSchedulePicker || isSubmitting}
+                isLoading={isSubmitting}
               >
                 Request Now
               </Button>
@@ -419,7 +426,8 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
                       type="submit" 
                       colorScheme="brand" 
                       width="full"
-                      isDisabled={!formData.scheduledDate || !formData.scheduledTime}
+                      isDisabled={!formData.scheduledDate || !formData.scheduledTime || isSubmitting}
+                      isLoading={isSubmitting}
                     >
                       Confirm Request
                     </Button>
