@@ -224,7 +224,7 @@ export default function Component() {
                 mt={{ base: 4, md: 8 }}
               >
                 <Image
-                  src="three guys image.png"
+                  src="team.svg"
                   alt="Three team members"
                   width="100%"
                   height="auto"
