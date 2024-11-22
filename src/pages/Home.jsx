@@ -21,6 +21,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  IconButton,
 } from '@chakra-ui/react'
 import {
   Table,
@@ -37,6 +38,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import PricingTable from '../components/PricingTable'
+import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 
 export default function Component() {
   const [address, setAddress] = useState('')
@@ -44,7 +46,30 @@ export default function Component() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   const [isHiringModalOpen, setIsHiringModalOpen] = useState(false)
-  
+  const [selectedServices, setSelectedServices] = useState([])
+  const [bhk, setBhk] = useState(1)
+  const [showPricing, setShowPricing] = useState(false)
+
+  const services = [
+    { id: 'sweeping', name: 'Sweeping', icon: '🧹', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
+    { id: 'mopping', name: 'Mopping', icon: '🪣', prices: { 1: 70, 2: 90, 3: 100, 4: 120 }, basePrice4Plus: 20 },
+    { id: 'dusting', name: 'Dusting', icon: '✨', prices: { 1: 60, 2: 80, 3: 90, 4: 110 }, basePrice4Plus: 20 },
+    { id: 'utensils', name: 'Utensils', icon: '🍽️', prices: { 1: 60, 2: 80, 3: 90, 4: 100 }, basePrice4Plus: 10 },
+    { id: 'bathroom', name: 'Bathroom', icon: '🚽', prices: { 1: 130, 2: 210, 3: 280, 4: 350 }, basePrice4Plus: 70 }
+  ]
+
+  const toggleService = (serviceId) => {
+    setSelectedServices(prev => 
+      prev.includes(serviceId) 
+        ? prev.filter(id => id !== serviceId)
+        : [...prev, serviceId]
+    )
+  }
+
+  const adjustBHK = (increment) => {
+    setBhk(prev => Math.max(1, prev + increment))
+  }
+
   const handleCallbackRequest = async (e) => {
     e.preventDefault();
 
@@ -246,27 +271,30 @@ export default function Component() {
                   
                   {/* Service icons grid */}
                   <SimpleGrid columns={{ base: 1, md: 3 }} spacing="8" w="full">
-                    {[
-                      { icon: Broom, label: "Sweeping" },
-                      { icon: Droplet, label: "Mopping" },
-                      { icon: Wind, label: "Dusting" },
-                      { icon: Utensils, label: "Utensils" },
-                      { icon: Shower, label: "Bathroom" },
-                    ].map((service, index) => (
+                    {services.map((service) => (
                       <VStack 
-                        key={index} 
+                        key={service.id} 
                         p="4" 
                         borderRadius="lg" 
-                        border="1px"
-                        borderColor="gray.200"
                         spacing="2"
+                        cursor="pointer"
+                        onClick={() => toggleService(service.id)}
+                        sx={{
+                          border: '1px solid',
+                          borderColor: selectedServices.includes(service.id) ? 'brand.200' : 'gray.200',
+                          backgroundColor: selectedServices.includes(service.id) ? 'brand.50' : 'white',
+                          '&:hover': {
+                            borderColor: 'brand.200'
+                          }
+                        }}
                       >
-                        <Icon as={service.icon} color="brand.500" boxSize="8" />
-                        <Text fontWeight="medium">{service.label}</Text>
+                        <Text fontSize="2xl">{service.icon}</Text>
+                        <Text fontWeight="medium">{service.name}</Text>
                       </VStack>
                     ))}
                   </SimpleGrid>
 
+                  {/* BHK Selection */}
                   <HStack spacing="4" alignItems="center">
                     <Box 
                       display="flex" 
@@ -292,14 +320,50 @@ export default function Component() {
                       Tell us how many BHK
                     </Text>
                   </HStack>
+
+                  <Box width="100%" textAlign="center">
+                    <Text mb={2}>Number of BHK</Text>
+                    <HStack justify="center" spacing={4}>
+                      <IconButton
+                        icon={<MinusIcon />}
+                        onClick={() => adjustBHK(-1)}
+                        isDisabled={bhk <= 1}
+                        size="sm"
+                        rounded="full"
+                      />
+                      <Text fontSize="xl" fontWeight="bold">{bhk} BHK</Text>
+                      <IconButton
+                        icon={<AddIcon />}
+                        onClick={() => adjustBHK(1)}
+                        size="sm"
+                        rounded="full"
+                      />
+                    </HStack>
+                  </Box>
+
+                  {/* See Price Button */}
+                  <Button
+                    colorScheme="brand"
+                    size="lg"
+                    width={{ base: "full", md: "auto" }}
+                    onClick={() => setShowPricing(true)}
+                    isDisabled={selectedServices.length === 0}
+                  >
+                    See Price
+                  </Button>
                 </VStack>
               </VStack>
             </VStack>
           </Container>
         </Box>
 
-        {/* Pricing Section */}
-        <PricingTable />
+        {/* Pricing Table */}
+        <PricingTable 
+          selectedServices={selectedServices}
+          bhk={bhk}
+          showPricing={showPricing}
+          services={services}
+        />
 
         {/* Safety Section */}
         <Box borderTop="1px" borderColor="gray.200" bg="gray.50">
