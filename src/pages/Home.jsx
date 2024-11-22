@@ -93,6 +93,16 @@ export default function Component() {
     }
   };
   
+  const handleAppDownload = () => {
+    toast({
+      title: 'Coming Soon!',
+      description: 'Our mobile app is currently under development.',
+      status: 'info',
+      duration: 3000,
+      isClosable: true,
+    })
+  }
+  
   return (
     <Box minH="100vh" display="flex" flexDir="column">
       <Box as="main" flex="1">
@@ -150,7 +160,12 @@ export default function Component() {
                 >
                   Get Started
                 </Button>
-                <Button w="full" variant="outline" h="12">
+                <Button 
+                  w="full" 
+                  variant="outline" 
+                  h="12"
+                  onClick={handleAppDownload}
+                >
                   Download our app
                 </Button>
               </VStack>
