@@ -78,11 +78,11 @@ function DeleteAccount() {
           
           <Text>
             To delete your account, please submit your phone number associated with your Swachh Saathi 
-            account below or email{' '}
+            mobile appaccount below or email{' '}
             <Link href="mailto:help@swachhsaathi.com" color="brand.500">
               help@swachhsaathi.com
             </Link>
-            {' '}with your request for account deletion. We will respond promptly.
+            {' '}with your request for account deletion. We will respond promptly. User data including name, phone number, and address will be deleted from our database.
           </Text>
 
           <Box width={{ base: "100%", sm: "400px" }}>
