@@ -536,6 +536,16 @@ export default function Component() {
             >
               Terms and Conditions
             </Button>
+            <Button
+              variant="ghost"
+              color="gray.600"
+              fontSize="sm"
+              fontWeight="medium"
+              as={RouterLink}
+              to="/delete-account"
+            >
+              Delete Account
+            </Button>
           </HStack>
         </Container>
       </Box>
