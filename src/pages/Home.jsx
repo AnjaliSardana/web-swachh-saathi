@@ -546,6 +546,16 @@ export default function Component() {
             >
               Delete Account
             </Button>
+            <Button
+              variant="ghost"
+              color="gray.600"
+              fontSize="sm"
+              fontWeight="medium"
+              as={RouterLink}
+              to="/support"
+            >
+              Support
+            </Button>
           </HStack>
         </Container>
       </Box>

@@ -3,6 +3,7 @@ import { PhoneIcon } from '@chakra-ui/icons'
 import { useDisclosure } from '@chakra-ui/react'
 import ServiceForm from './ServiceForm'
 import { BsWhatsapp } from 'react-icons/bs'
+import { Link as RouterLink } from 'react-router-dom'
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -23,9 +24,12 @@ function Navbar() {
         <HStack justify="space-between" align="center">
           {/* Left side - Brand name */}
           <Text
+            as={RouterLink}
+            to="/"
             fontSize="xl"
             fontWeight="bold"
             color="black"
+            _hover={{ textDecoration: 'none' }}
           >
             Swachh Saathi
           </Text>
