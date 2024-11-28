@@ -22,6 +22,7 @@ import {
   ModalBody,
   ModalCloseButton,
   IconButton,
+  Link,
 } from '@chakra-ui/react'
 import {
   Table,
@@ -119,13 +120,7 @@ export default function Component() {
   };
   
   const handleAppDownload = () => {
-    toast({
-      title: 'Coming Soon!',
-      description: 'Our mobile app is currently under development.',
-      status: 'info',
-      duration: 3000,
-      isClosable: true,
-    })
+    window.open('https://apps.apple.com/us/app/swachh-saathi/id6738629953', '_blank')
   }
   
   return (
@@ -185,13 +180,29 @@ export default function Component() {
                 >
                   Get Started
                 </Button>
+                <Text 
+                  fontSize="base" 
+                  color="gray.600"
+                  textAlign="center"
+                >
+                  Get the app to save an address and view past requests
+                </Text>
                 <Button 
                   w="full" 
-                  variant="outline" 
+                  variant="unstyled" 
                   h="12"
                   onClick={handleAppDownload}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  bg="transparent"
                 >
-                  Download our app
+                  <Image 
+                    src="/store-badges/App Store Badge.svg"
+                    alt="Download on the App Store"
+                    height="44px"
+                    width="auto"
+                  />
                 </Button>
               </VStack>
             </VStack>
@@ -365,6 +376,37 @@ export default function Component() {
           services={services}
         />
 
+        {/* App Store Button Section */}
+        <Box py="12" textAlign="center" bg="white">
+          <Container maxW="container.xl">
+            <VStack spacing={4}>
+              <Text
+                fontSize={{ base: "xl", md: "2xl" }}
+                fontWeight="medium"
+                color="gray.700"
+              >
+                Download our app for the best experience
+              </Text>
+              <Button 
+                variant="unstyled" 
+                h="12"
+                onClick={handleAppDownload}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                bg="transparent"
+              >
+                <Image 
+                  src="/store-badges/App Store Badge.svg"
+                  alt="Download on the App Store"
+                  height="44px"
+                  width="auto"
+                />
+              </Button>
+            </VStack>
+          </Container>
+        </Box>
+
         {/* Safety Section */}
         <Box borderTop="1px" borderColor="gray.200" bg="gray.50">
           <Container 
@@ -499,64 +541,82 @@ export default function Component() {
         py="6"
       >
         <Container maxW="container.xl">
-          <HStack 
-            spacing={{ base: 4, md: 8 }} 
-            justify="center"
-            flexWrap="wrap"
-          >
-            <Button
-              variant="ghost"
-              color="gray.600"
-              fontSize="sm"
-              fontWeight="medium"
-              as="a"
-              href="https://wa.me/917428421373"
-              target="_blank"
-              rel="noopener noreferrer"
+          <VStack spacing={6}>
+            <HStack 
+              spacing={{ base: 4, md: 8 }} 
+              justify="center"
+              flexWrap="wrap"
             >
-              Contact Us
-            </Button>
-            <Button
-              variant="ghost"
-              color="gray.600"
-              fontSize="sm"
-              fontWeight="medium"
-              as={RouterLink}
-              to="/privacy-policy"
+              <Button
+                variant="ghost"
+                color="gray.600"
+                fontSize="sm"
+                fontWeight="medium"
+                as="a"
+                href="https://wa.me/917428421373"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact Us
+              </Button>
+              <Button
+                variant="ghost"
+                color="gray.600"
+                fontSize="sm"
+                fontWeight="medium"
+                as={RouterLink}
+                to="/privacy-policy"
+              >
+                Privacy Policy
+              </Button>
+              <Button
+                variant="ghost"
+                color="gray.600"
+                fontSize="sm"
+                fontWeight="medium"
+                as={RouterLink}
+                to="/terms"
+              >
+                Terms and Conditions
+              </Button>
+              <Button
+                variant="ghost"
+                color="gray.600"
+                fontSize="sm"
+                fontWeight="medium"
+                as={RouterLink}
+                to="/delete-account"
+              >
+                Delete Account
+              </Button>
+              <Button
+                variant="ghost"
+                color="gray.600"
+                fontSize="sm"
+                fontWeight="medium"
+                as={RouterLink}
+                to="/support"
+              >
+                Support
+              </Button>
+            </HStack>
+            <Button 
+              variant="unstyled" 
+              h="12"
+              onClick={handleAppDownload}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              bg="transparent"
             >
-              Privacy Policy
+              <Image 
+                src="/store-badges/App Store Badge.svg"
+                alt="Download on the App Store"
+                height="44px"
+                width="auto"
+              />
             </Button>
-            <Button
-              variant="ghost"
-              color="gray.600"
-              fontSize="sm"
-              fontWeight="medium"
-              as={RouterLink}
-              to="/terms"
-            >
-              Terms and Conditions
-            </Button>
-            <Button
-              variant="ghost"
-              color="gray.600"
-              fontSize="sm"
-              fontWeight="medium"
-              as={RouterLink}
-              to="/delete-account"
-            >
-              Delete Account
-            </Button>
-            <Button
-              variant="ghost"
-              color="gray.600"
-              fontSize="sm"
-              fontWeight="medium"
-              as={RouterLink}
-              to="/support"
-            >
-              Support
-            </Button>
-          </HStack>
+          </VStack>
         </Container>
       </Box>
     </Box>

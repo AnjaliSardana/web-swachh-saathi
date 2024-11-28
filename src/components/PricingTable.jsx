@@ -32,7 +32,7 @@ function PricingTable({ selectedServices, bhk, showPricing, services }) {
   }
 
   return (
-    <Box py={{ base: 6, md: 10 }} bg="gray.50">
+    <Box py={{ base: 6, md: 10 }} bg="white">
       <Container maxW="container.xl" px={{ base: 4, md: 8 }}>
         <VStack spacing={8}>
           {/* Display Price */}

@@ -21,6 +21,8 @@ import {
   Select,
   Textarea,
   useToast,
+  Alert,
+  CloseButton,
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
@@ -107,6 +109,8 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
   const toast = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const [showAppTip, setShowAppTip] = useState(true)
 
   const calculateServicePrice = (service, bhk) => {
     if (bhk <= 4) {
@@ -236,6 +240,24 @@ function ServiceForm({ isOpen, onClose, initialAddress = '' }) {
         <ModalBody>
           <form onSubmit={handleSubmit}>
             <VStack spacing={6} pb={6}>
+              {showAppTip && (
+                <Alert 
+                  status="info" 
+                  variant="solid" 
+                  borderRadius="full"
+                  bg="#0097B1"
+                  color="white"
+                >
+                  Download the app to save an address and view your past requests
+                  <CloseButton 
+                    position="absolute"
+                    right="8px"
+                    top="8px"
+                    onClick={() => setShowAppTip(false)}
+                  />
+                </Alert>
+              )}
+
               <FormControl isRequired>
                 <FormLabel>Service Address</FormLabel>
                 <Input
