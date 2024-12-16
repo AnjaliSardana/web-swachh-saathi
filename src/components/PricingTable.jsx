@@ -32,7 +32,7 @@ function PricingTable({ selectedServices, bhk, showPricing, services }) {
   }
 
   return (
-    <Box py={{ base: 6, md: 10 }} bg="white">
+    <Box py={{ base: 2, md: 4 }} bg="white">
       <Container maxW="container.xl" px={{ base: 4, md: 8 }}>
         <VStack spacing={8}>
           {/* Display Price */}
@@ -52,18 +52,16 @@ function PricingTable({ selectedServices, bhk, showPricing, services }) {
                   </Text>
                 )
               })}
+              <Button
+                colorScheme="brand"
+                size="lg"
+                width={{ base: "full", md: "auto" }}
+                onClick={onOpen}
+              >
+                Request a Service
+              </Button>
             </VStack>
           )}
-
-          {/* Request Service Button */}
-          <Button
-            colorScheme="brand"
-            size="lg"
-            width={{ base: "full", md: "auto" }}
-            onClick={onOpen}
-          >
-            Request a Service
-          </Button>
         </VStack>
       </Container>
 

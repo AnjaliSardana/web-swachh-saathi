@@ -3,36 +3,84 @@ import { extendTheme } from '@chakra-ui/react'
 const theme = extendTheme({
   colors: {
     brand: {
-      50: '#e6f6f9',
-      100: '#b3e4ec',
-      200: '#80d2df',
-      300: '#4dc0d2',
-      400: '#1aaec5',
-      500: '#179cb1',
-      600: '#138a9d',
-      700: '#0f7889',
-      800: '#0b6675',
-      900: '#075461',
+      50: '#F6F6F6',
+      100: '#EEEEEE',
+      200: '#E2E2E2',
+      300: '#CBCBCB',
+      400: '#AFAFAF',
+      500: '#6B6B6B',
+      600: '#545454',
+      700: '#333333',
+      800: '#1C1C1C',
+      900: '#000000',
     },
   },
   fonts: {
-    heading: `'SF Pro Text', -apple-system, system-ui, sans-serif`,
-    body: `'SF Pro Text', -apple-system, system-ui, sans-serif`,
+    heading: `'UberMove', -apple-system, system-ui, sans-serif`,
+    body: `'UberMoveText', -apple-system, system-ui, sans-serif`,
   },
   components: {
     Button: {
       baseStyle: {
         borderRadius: 'md',
         fontWeight: '500',
-        fontFamily: `'SF Pro Text', -apple-system, system-ui, sans-serif`,
+        fontFamily: `'UberMoveText', -apple-system, system-ui, sans-serif`,
+      },
+      variants: {
+        solid: {
+          bg: 'black',
+          color: 'white',
+          _hover: {
+            bg: 'gray.800',
+          },
+        },
+        outline: {
+          borderColor: 'gray.300',
+          color: 'black',
+          _hover: {
+            bg: 'gray.50',
+          },
+        },
       },
       defaultProps: {
         colorScheme: 'brand',
       },
     },
+    Input: {
+      variants: {
+        outline: {
+          field: {
+            borderColor: 'gray.300',
+            _focus: {
+              borderColor: 'black',
+              boxShadow: 'none',
+            },
+            _hover: {
+              borderColor: 'gray.400',
+            },
+          },
+        },
+      },
+    },
+    Select: {
+      variants: {
+        outline: {
+          field: {
+            borderColor: 'gray.300',
+            _focus: {
+              borderColor: 'black',
+              boxShadow: 'none',
+            },
+            _hover: {
+              borderColor: 'gray.400',
+            },
+          },
+        },
+      },
+    },
     Text: {
       baseStyle: {
-        fontFamily: `'SF Pro Text', -apple-system, system-ui, sans-serif`,
+        fontFamily: `'UberMoveText', -apple-system, system-ui, sans-serif`,
       },
     },
   },
