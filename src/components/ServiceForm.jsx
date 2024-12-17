@@ -168,6 +168,8 @@ function ServiceForm({
 
   const [showAppTip, setShowAppTip] = useState(true)
 
+  const [showUnavailableMessage, setShowUnavailableMessage] = useState(false);
+
   const calculateServicePrice = (service, bhk) => {
     if (bhk <= 4) {
       return service.prices[bhk]

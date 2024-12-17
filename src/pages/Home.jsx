@@ -330,7 +330,7 @@ export default function Component() {
                     fontSize={{ base: "4xl", md: "5xl" }}
                     fontWeight="bold"
                     mb={6}
-                    fontFamily="UberMove, sans-serif"
+                    fontFamily="Inter, sans-serif"
                   >
                     Get house help anytime with Swachh Saathi
                   </Heading>
@@ -512,7 +512,7 @@ export default function Component() {
                     <Heading 
                       fontSize="2xl" 
                       mb={6}
-                      fontFamily="UberMove, sans-serif"
+                      fontFamily="Inter, sans-serif"
                     >
                       Suggestions
                     </Heading>
@@ -716,7 +716,7 @@ export default function Component() {
                 fontSize={{ base: "2xl", md: "3xl" }}
                 fontWeight="bold"
                 textAlign="center"
-                fontFamily="UberMove, sans-serif"
+                fontFamily="Inter, sans-serif"
               >
                 It's easier in the app
               </Heading>

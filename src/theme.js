@@ -16,15 +16,15 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    heading: `'UberMove', -apple-system, system-ui, sans-serif`,
-    body: `'UberMoveText', -apple-system, system-ui, sans-serif`,
+    heading: `'Inter', -apple-system, system-ui, sans-serif`,
+    body: `'Inter', -apple-system, system-ui, sans-serif`,
   },
   components: {
     Button: {
       baseStyle: {
         borderRadius: 'md',
         fontWeight: '500',
-        fontFamily: `'UberMoveText', -apple-system, system-ui, sans-serif`,
+        fontFamily: `'Inter', -apple-system, system-ui, sans-serif`,
       },
       variants: {
         solid: {
@@ -80,7 +80,7 @@ const theme = extendTheme({
     },
     Text: {
       baseStyle: {
-        fontFamily: `'UberMoveText', -apple-system, system-ui, sans-serif`,
+        fontFamily: `'Inter', -apple-system, system-ui, sans-serif`,
       },
     },
   },
