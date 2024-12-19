@@ -1,13 +1,40 @@
 import { Box, Container, Heading, Text, VStack, Input, InputGroup, InputLeftElement, InputRightElement, Button, Icon } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { BsPin } from 'react-icons/bs'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
 import ServiceForm from './ServiceForm'
+import { useLoadScript } from '@react-google-maps/api'
 
 function Hero() {
   const [address, setAddress] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const addressInputRef = useRef(null)
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    libraries: ['places'],
+  })
+
+  useEffect(() => {
+    if (isLoaded && addressInputRef.current) {
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        addressInputRef.current,
+        { 
+          componentRestrictions: { country: 'IN' },
+          fields: ['formatted_address'],
+          types: ['address']
+        }
+      )
+
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace()
+        if (place.formatted_address) {
+          setAddress(place.formatted_address)
+        }
+      })
+    }
+  }, [isLoaded])
 
   const handleAddressSubmit = () => {
     onOpen()
@@ -72,6 +99,7 @@ function Hero() {
                 <Icon as={BsPin} color="gray.400" boxSize={5} />
               </InputLeftElement>
               <Input
+                ref={addressInputRef}
                 placeholder="Enter service address"
                 bg="white"
                 border="1px solid"
@@ -89,6 +117,7 @@ function Hero() {
                 pr="4rem"
                 borderRadius="full"
                 position="relative"
+                disabled={!isLoaded}
               />
               <InputRightElement 
                 width="4rem" 

@@ -15,9 +15,9 @@ function Navbar() {
       top="0"
       left="0"
       right="0"
-      bg="white"
+      bg="black"
       borderBottom="1px"
-      borderColor="gray.200"
+      borderColor="gray.800"
       zIndex="sticky"
     >
       <Container maxW="container.xl" py="2">
@@ -28,25 +28,27 @@ function Navbar() {
             to="/"
             fontSize="xl"
             fontWeight="bold"
-            color="black"
-            _hover={{ textDecoration: 'none' }}
+            color="white"
+            _hover={{ textDecoration: 'none', color: 'gray.200' }}
           >
             Swachh Saathi
           </Text>
 
           {/* Right side - Contact icons */}
           <HStack spacing={4} align="center">
-          <Button
+            <Button
               size="sm"
-              colorScheme="brand"
+              bg="white"
+              color="black"
+              _hover={{ bg: 'gray.100' }}
               onClick={onOpen}
             >
               Request Services
             </Button>
             <Link 
               href="tel:+917428421373" 
-              color="gray.800"
-              _hover={{ color: "brand.500" }}
+              color="white"
+              _hover={{ color: "gray.200" }}
               display="flex"
               alignItems="center"
               height="24px"
@@ -57,8 +59,8 @@ function Navbar() {
             <Link 
               href="https://wa.me/917428421373" 
               isExternal
-              color="gray.800"
-              _hover={{ color: "brand.500" }}
+              color="white"
+              _hover={{ color: "gray.200" }}
               display="flex"
               alignItems="center"
               height="24px"
